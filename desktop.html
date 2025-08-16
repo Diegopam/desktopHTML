@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Desktop Completo WM Style</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- START MENU -->
+  <div id="startMenu" aria-hidden="true">
+    <div class="menu-header">
+      <strong>Menu</strong>
+      <input id="menuSearch" placeholder="Pesquisar apps… (digite ou use /)" autocomplete="off" />
+    </div>
+
+    <div class="menu-body">
+      <div class="menu-section">
+        <h4>Aplicativos</h4>
+        <div id="appsGrid" class="menu-grid"><!-- render via JS --></div>
+      </div>
+      <div class="menu-section">
+        <h4>Atalhos rápidos</h4>
+        <div id="quickList" class="quicklist"><!-- render via JS --></div>
+      </div>
+    </div>
+
+    <div class="menu-footer">
+      <div class="muted">Dica: <span class="kbd">Meta</span> abre/fecha o menu • <span class="kbd">Esc</span> fecha
+      </div>
+      <div class="power">
+        <button id="btnLock" title="Bloquear">Bloquear</button>
+        <button id="btnLogout" title="Sair">Sair</button>
+        <button id="btnShutdown" title="Desligar">Desligar</button>
+      </div>
+    </div>
+  </div>
+  <div id="backdrop"></div>
+
+  <!-- DESKTOP -->
+  <div id="desktop"></div>
+
+  <!-- TASKBAR -->
+  <div id="taskbar" role="toolbar" aria-label="Barra de Tarefas">
+    <div id="leftArea">
+      <button id="startBtn" class="task-btn" title="Menu">
+        <span id="startDot"></span> Menu
+      </button>
+    </div>
+
+    <div id="centerArea"><!-- botões de janelas aqui --></div>
+
+    <div id="rightArea">
+      <span id="clock">--:--</span>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

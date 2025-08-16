@@ -1,0 +1,415 @@
+:root {
+    --bg: #1e1e2f;
+    --task: #333;
+    --task-btn: #555;
+    --title: #2c2c3c;
+    --ring: transparent;
+    --menu: #26263a;
+    --menu-acc: #2f2f49;
+    --txt: #eaeaf5;
+    --muted: #b9bed1;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: var(--bg);
+    overflow: hidden;
+    font-family: system-ui, Segoe UI, Roboto, sans-serif;
+    color: var(--txt);
+}
+
+/* Taskbar */
+#taskbar {
+    position: fixed;
+    inset: auto 0 0 0;
+    height: 40px;
+    background: var(--task);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    z-index: 9999;
+}
+
+#leftArea {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#centerArea {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: auto;
+}
+
+#rightArea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.task-btn,
+#taskbar button {
+    background: var(--task-btn);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: transform .08s ease, opacity .15s;
+}
+
+.task-btn:active {
+    transform: translateY(1px)
+}
+
+.task-item {
+    white-space: nowrap;
+    max-width: 160px;
+    text-overflow: ellipsis;
+    overflow: hidden
+}
+
+/* Start button */
+#startBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+#startDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #30d158;
+    box-shadow: 0 0 8px #30d158cc
+}
+
+/* Tray */
+#clock {
+    min-width: 82px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted)
+}
+
+#desktop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    /* altura da taskbar */
+    overflow: hidden;
+    z-index: 1;
+    /* abaixo das janelas, acima do fundo */ }
+
+/* Window */
+.window {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 300px;
+    height: 200px;
+    background: #fff;
+    color: #111;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .4);
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    min-height: 100px;
+    z-index: 10000;
+}
+
+.titlebar {
+    background: var(--title);
+    color: #fff;
+    padding: 5px 10px;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.btn {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: gray
+}
+
+.btn.close {
+    background: #e74c3c;
+    cursor: pointer;
+}
+
+.btn.minimize {
+    background: #f1c40f;
+    cursor: pointer;
+}
+
+.btn.maximize {
+    background: #2ecc71;
+    cursor: pointer;
+}
+
+.content {
+    flex: 1;
+    padding: 10px;
+    overflow: auto
+}
+
+/* Resizers */
+.resizer {
+    position: absolute;
+    background: transparent;
+    z-index: 2
+}
+
+.resizer.nw,
+.resizer.ne,
+.resizer.sw,
+.resizer.se {
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--ring)
+}
+
+.resizer.nw {
+    top: 0;
+    left: 0;
+    cursor: nw-resize
+}
+
+.resizer.ne {
+    top: 0;
+    right: 0;
+    cursor: ne-resize
+}
+
+.resizer.sw {
+    bottom: 0;
+    left: 0;
+    cursor: sw-resize
+}
+
+.resizer.se {
+    bottom: 0;
+    right: 0;
+    cursor: se-resize
+}
+
+.resizer.n {
+    top: 0;
+    left: 12px;
+    right: 12px;
+    height: 6px;
+    cursor: n-resize
+}
+
+.resizer.s {
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 6px;
+    cursor: s-resize
+}
+
+.resizer.e {
+    top: 12px;
+    bottom: 12px;
+    right: 0;
+    width: 6px;
+    cursor: e-resize
+}
+
+.resizer.w {
+    top: 12px;
+    bottom: 12px;
+    left: 0;
+    width: 6px;
+    cursor: w-resize
+}
+
+/* Start Menu */
+#startMenu {
+    position: fixed;
+    left: 8px;
+    bottom: 48px;
+    width: 590px;
+    max-height: 70vh;
+    background: var(--menu);
+    border: 1px solid #00000033;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: saturate(1.2) blur(6px);
+    z-index: 9000;
+}
+
+#startMenu.show {
+    display: flex
+}
+
+.menu-header {
+    padding: 10px;
+    border-bottom: 1px solid #ffffff14;
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.menu-header input {
+    flex: 1;
+    background: var(--menu-acc);
+    border: 1px solid #ffffff20;
+    color: var(--txt);
+    padding: 8px 10px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.menu-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px
+}
+
+.menu-section {
+    background: #ffffff06;
+    border: 1px solid #ffffff14;
+    border-radius: 10px;
+    padding: 10px
+}
+
+.menu-section h4 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: var(--muted)
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px
+}
+
+.app {
+    background: var(--menu-acc);
+    border: 1px solid #ffffff20;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform .08s ease, background .15s;
+}
+
+.app:active {
+    transform: translateY(1px)
+}
+
+.app .icon {
+    font-size: 18px
+}
+
+.app .label {
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.quicklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.quick-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #ffffff08;
+    border: 1px solid #ffffff14
+}
+
+.quick-item:active {
+    transform: translateY(1px)
+}
+
+.menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ffffff14
+}
+
+.power {
+    display: flex;
+    gap: 8px
+}
+
+.power button {
+    background: #ff3b30;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 12px
+}
+
+.kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: #00000055;
+    color: #fff;
+    border-radius: 6px;
+    padding: 2px 6px;
+    border: 1px solid #ffffff22
+}
+
+/* Backdrop click catcher */
+#backdrop {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    display: none;
+    z-index: 5;
+}
+
+#backdrop.show {
+    display: block
+}
